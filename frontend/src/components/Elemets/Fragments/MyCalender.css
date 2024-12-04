@@ -1,0 +1,26 @@
+/* MyCalendar.css */
+@layer components {
+    .react-calendar {
+        @apply bg-green-50; /* Warna latar belakang kalender hijau pucat */
+    }
+
+    .react-calendar__tile {
+        @apply text-gray-800; /* Warna teks pada setiap tanggal */
+    }
+
+    .react-calendar__tile--active {
+        @apply bg-green-600 text-white; /* Warna latar belakang aktif dan teks */
+    }
+
+    .react-calendar__navigation {
+        @apply bg-green-600 text-white; /* Warna latar belakang navigasi */
+    }
+
+    .react-calendar__month-view__days__day {
+        @apply border border-green-500; /* Batas tanggal */
+    }
+
+    .react-calendar__tile--hover {
+        @apply bg-green-200; /* Warna latar belakang hover */
+    }
+}

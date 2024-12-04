@@ -7,7 +7,12 @@ export default {
       colors:{
         'hijau':'#00583B',
         'kuning':'#E5AD23'
-      }
+      },
+      fontFamily: {
+        bebas: ["Bebas Neue", "sans-serif"],
+        inter: ["Inter", "sans-serif"],
+        anton: ["Anton", "sans-serif"],
+      },
     },
   },
   plugins: [],
