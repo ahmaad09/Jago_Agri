@@ -1,51 +1,58 @@
-import React, { useState } from "react";
-import axios from "axios";
-import Forgot from "../Button/Forgot";
-import InputForm from "../Input/Index";
-import Button from "../Button/Index";
+import React, { useState } from 'react';
+import InputForm from '../Input/Index'; // Pastikan path sesuai
+import Button from '../Button/Index'; // Pastikan path sesuai
+import Forgot from '../Button/Forgot'; // Pastikan path sesuai
 
-const FormLogin = () => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState(null);
+const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        window.location.href = "/dashboard";
 
-        // setLoading(true);
-        // setError(null);
+        if (!email || !password) {
+            setError('Email dan password wajib diisi!');
+            return;
+        }
 
-        // try {
-        //     const response = await axios.post("http://localhost:4000/users)", {
-        //         username,
-        //         password,
-        //     });
+        setLoading(true);
+        try {
+            const response = await fetch('http://localhost:3000/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password }),
+            });
 
-        //     console.log("Login berhasil:", response.data);
-        //     alert("Login berhasil!");
+            const data = await response.json();
 
-        //     localStorage.setItem("user", JSON.stringify(response.data.users));
-        //     // window.location.href = "/dashboard"; 
-        // } catch (err) {
-        //     console.error("Error saat login:", err);
-        //     setError(err.response?.data?.message || "Terjadi kesalahan saat login.");
-        // } finally {
-        //     setLoading(false);
-        // }
+            if (response.ok) {
+                localStorage.setItem('token', data.token);
+                alert('Login berhasil!');
+                window.location.href = '/dashboard';
+            } else {
+                setError(data.message);
+            }
+        } catch (err) {
+            setError('Terjadi kesalahan saat menghubungi server.');
+            console.error('Error:', err);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
         <form onSubmit={handleLogin} className="flex flex-col" method="POST">
             <InputForm
-                type="text"
-                name="username"
-                placeholder="Username"
-                htmlFor="username"
-                id="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                type="email"
+                name="email"
+                placeholder="Email"
+                htmlFor="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
             />
 
             <InputForm
@@ -56,6 +63,7 @@ const FormLogin = () => {
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                required
             />
 
             {error && <p className="text-red-500 text-center">{error}</p>}
@@ -75,4 +83,4 @@ const FormLogin = () => {
     );
 };
 
-export default FormLogin;
+export default Login;

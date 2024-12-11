@@ -90,7 +90,7 @@ const WeatherForecast = ({ city }) => {
             <div className="flex space-x-5" data-aos="fade-left">
                 {/* Kotak pertama */}
                 <div className="bg-hijau w-[594.87px] h-[230px] rounded-[30px]">
-                    <h2 className="font-semibold text-white text-2xl p-5 text-center">
+                    <h2 className="font-semibold text-white text-3xl p-5 text-center">
                         {kota}
                     </h2>
                     <div id="jam" className="text-center text-white text-2xl mt-5">

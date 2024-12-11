@@ -7,7 +7,6 @@ import RegisterPages from './Pages/Register.jsx';
 import ErrorPage from './Pages/404.jsx';
 import ProductPage from './Pages/products.jsx';
 import ResetAcount from './Pages/resetAcount.jsx';
-import ResetUsername from './Pages/resetUsername.jsx';
 import ResetPassword from './Pages/resetPassword.jsx';
 import Dashboard from './Pages/dashboard.jsx';
 import HomePages from './Pages/homePages.jsx';
@@ -15,6 +14,9 @@ import Forum from './Pages/forum.jsx';
 import Panduan from './Pages/panduan.jsx';
 import HawarDaun from './Pages/hawarDaun.jsx';
 import PenyakitBulai from './Pages/penyakitBulai.jsx';
+import ResetEmail from './Pages/resetEmail.jsx';
+import ProtectedRoute from './Pages/ProtectedRoute.jsx';
+
 
 const router = createBrowserRouter([
   {
@@ -38,11 +40,11 @@ const router = createBrowserRouter([
     element: <ResetAcount/>
   },
   {
-    path: "/resetUsername",
-    element: <ResetUsername/>
+    path: "/reset-email",
+    element: <ResetEmail/>
   },
   {
-    path: "/resetPassword",
+    path: "/reset-password",
     element: <ResetPassword/>
   },
   {
@@ -51,23 +53,40 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard/>
+    element:  (
+      <ProtectedRoute>
+        <Dashboard />
+      </ProtectedRoute>
+    )
   },
   {
     path: "/forum",
-    element: <Forum/>
+    element: (
+      <ProtectedRoute>
+        <Forum />
+      </ProtectedRoute>
+    )
   },
   {
     path: "/panduan",
-    element: <Panduan/>
+    element: (
+      <ProtectedRoute>
+        <Panduan />
+      </ProtectedRoute>
+    )
   },
   {
     path: "/hawarDaun",
-    element: <HawarDaun/>
+    element: <ProtectedRoute>
+      <HawarDaun/>
+      </ProtectedRoute>
   },
   {
     path: "/penyakitBulai",
-    element: <PenyakitBulai/>
+    element: 
+      <ProtectedRoute>
+        <PenyakitBulai/>
+      </ProtectedRoute>
   }
 ])
 

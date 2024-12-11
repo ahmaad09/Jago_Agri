@@ -13,6 +13,9 @@ export default {
         inter: ["Inter", "sans-serif"],
         anton: ["Anton", "sans-serif"],
       },
+      borderRadius: {
+        '4xl': '2rem',
+      }
     },
   },
   plugins: [],

@@ -31,7 +31,7 @@ const Navigasi = ({
       <div className="sm:hidden flex items-center p-2">
         <button
           onClick={toggleMenu}
-          className="text-gray-800 bg-gray-200 p-2 rounded focus:outline-none"
+          className="text-gray-800  bg-gray-200 p-2 rounded focus:outline-none fixed top-4 right-4"
         >
           ☰
         </button>
@@ -41,7 +41,7 @@ const Navigasi = ({
       <div
         className={`${
           isMenuOpen ? "block" : "hidden"
-        } sm:flex sm:items-center sm:justify-between font-semibold`}
+        } sm:flex sm:items-center sm:justify-between flex-col `}
       >
         <div className="flex flex-col sm:flex-row sm:gap-8">
           <Link

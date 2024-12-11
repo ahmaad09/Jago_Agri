@@ -1,5 +1,5 @@
 const Button = (props) => {
-    const { children, classname = 'bg-black',onClick = ()=>{},type="button" } = props;
+    const { children, classname = 'bg-kuning',onClick = ()=>{},type="button" } = props;
     return (
         <button
             type={type}
