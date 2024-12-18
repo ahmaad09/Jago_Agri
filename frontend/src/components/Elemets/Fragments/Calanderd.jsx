@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
@@ -8,48 +9,77 @@ function MyCalendar() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentNote, setCurrentNote] = useState("");
 
+    const apiUrl = "http://localhost:3000/notes"; // API backend
+
+    // Fetch notes dari backend
+    useEffect(() => {
+        const fetchNotes = async () => {
+            try {
+                const token = localStorage.getItem("token"); // Ambil token dari localStorage
+                const response = await axios.get(apiUrl, {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+                setNotes(response.data); // Simpan data notes ke state
+            } catch (error) {
+                console.error("Gagal memuat catatan:", error);
+            }
+        };
+        fetchNotes();
+    }, []);
+
+    const saveNote = async () => {
+        try {
+            const token = localStorage.getItem("token");
+            const newNote = {
+                title: `Catatan untuk ${value.toLocaleDateString()}`,
+                content: currentNote,
+            };
+
+            const response = await axios.post(apiUrl, newNote, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+
+            setNotes([...notes, { ...newNote, id: response.data.noteId }]);
+            setCurrentNote(""); // Reset input
+            setIsModalOpen(false); // Tutup modal
+        } catch (error) {
+            console.error("Gagal menyimpan catatan:", error);
+        }
+    };
+
+    const deleteNote = async (id) => {
+        try {
+            const token = localStorage.getItem("token");
+            await axios.delete(apiUrl, {
+                headers: { Authorization: `Bearer ${token}` },
+                data: { id },
+            });
+
+            setNotes(notes.filter((note) => note.id !== id));
+        } catch (error) {
+            console.error("Gagal menghapus catatan:", error);
+        }
+    };
+
     const handleDateClick = (date) => {
         onChange(date);
         setIsModalOpen(true);
     };
 
-    const handleNoteChange = (event) => {
-        setCurrentNote(event.target.value);
-    };
-
-    const saveNote = () => {
-        const newNote = {
-            date: value.toLocaleDateString(),
-            day: value.toLocaleDateString('id-ID', { weekday: 'long' }),
-            content: currentNote,
-        };
-
-        setNotes([...notes, newNote]); // Tambahkan catatan baru ke dalam array notes
-        setCurrentNote(""); // Reset input
-        setIsModalOpen(false); // Tutup modal
-    };
-
-    const deleteNote = (index) => {
-        const updatedNotes = notes.filter((_, i) => i !== index);
-        setNotes(updatedNotes);
-    };
-
     return (
         <div className=" rounded-4xl h-screen">
             <div className="flex">
-                {/* Kalender */}
                 <div className="max-w-md mx-5 my-10 flex-shrink-0">
                     <h2 className="font-semibold text-hijau text-4xl border-b-2 border-hijau w-fit my-8 ">Calender</h2>
                     <div className="react-calendar-container">
                         <Calendar
-                            onClickDay={handleDateClick} // Fungsi untuk menangani klik pada tanggal
+                            onClickDay={handleDateClick}
                             value={value}
                             className="react-calendar rounded-lg shadow-md border border-gray-200 p-5"
                         />
                     </div>
                 </div>
 
-                {/* Catatan */}
                 <div className="ml-10 max-w-lg p-4 border border-gray-300 rounded-md shadow-sm flex-shrink-0 h-full w-full mt-36">
                     <h3 className="text-gray-700 mb-2">Catatan Tersimpan</h3>
                     {notes.length > 0 ? (
@@ -57,20 +87,18 @@ function MyCalendar() {
                             <thead>
                                 <tr>
                                     <th className="border p-2 text-left">Tanggal</th>
-                                    <th className="border p-2 text-left">Hari</th>
                                     <th className="border p-2 text-left">Catatan</th>
                                     <th className="border p-2 text-left">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {notes.map((note, index) => (
-                                    <tr key={index}>
-                                        <td className="border p-2">{note.date}</td>
-                                        <td className="border p-2">{note.day}</td>
+                                {notes.map((note) => (
+                                    <tr key={note.id}>
+                                        <td className="border p-2">{note.title}</td>
                                         <td className="border p-2">{note.content}</td>
                                         <td className="border p-2 text-center">
                                             <button
-                                                onClick={() => deleteNote(index)}
+                                                onClick={() => deleteNote(note.id)}
                                                 className="bg-red-500 text-white px-2 py-1 rounded-md"
                                             >
                                                 Hapus
@@ -85,7 +113,6 @@ function MyCalendar() {
                     )}
                 </div>
 
-                {/* Modal untuk menambah catatan */}
                 {isModalOpen && (
                     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                         <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
@@ -94,7 +121,7 @@ function MyCalendar() {
                                 className="w-full p-2 border border-gray-300 rounded-md"
                                 rows="4"
                                 value={currentNote}
-                                onChange={handleNoteChange}
+                                onChange={(e) => setCurrentNote(e.target.value)}
                                 placeholder="Tulis catatan di sini..."
                             ></textarea>
                             <div className="mt-4 flex justify-between">

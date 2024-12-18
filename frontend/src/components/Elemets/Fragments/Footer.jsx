@@ -17,7 +17,7 @@ const Footer = () => {
                     <div className="flex flex-col gap-5 mt-10">
                         <h2 className="text-xl font-bold text-white">Social Media</h2>
                         <Link to="https://www.facebook.com/jagoagri/" className="flex gap-3 items-center">
-                            <img src="/icons/sosial-media/facebook 1.png" alt="" width={"45px"} />
+                            <img src="/icons/sosial-media/facebook 1.png" alt="" width={"45px"} className="" />
                             <div className="flex flex-col text-white p-0 text-sm">
                                 <p className="font-semibold">Facebook</p>
                                 <p className="text-white/60">@JagoAgri</p>
@@ -48,7 +48,7 @@ const Footer = () => {
                                 <p className="text-white/60">jagoagri@gmail.com</p>
                             </div>
                         </Link>
-                        <Link to="jagoagri@gmail.com" className="flex gap-3 items-center">
+                        <Link to="https://wa.me/628123456789" className="flex gap-3 items-center">
                             <img src="/icons/kontak/phone-call 1.png" alt="" width={"45px"} />
                             <div className="flex flex-col text-white p-0 text-sm">
                                 <p className="font-semibold">PHONE</p>

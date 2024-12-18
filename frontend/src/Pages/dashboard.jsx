@@ -22,11 +22,12 @@ const Dashboard = () => {
                     dashboardText="Dashboard"
                     forumText="Forum"
                     panduanText="Panduan"
+                    news = "News"
                     pengaturanText="Pengaturan"
                 />
             </Header>
-            <div className="container mx-auto mt-10">
-                <div className="flex flex-col mt-32 gap-5 mx-5">
+            <div className="container mx-auto">
+                <div className="flex flex-col mt-12 gap-5 mx-5">
                     <div className="flex gap-5 sm:flex-row flex-col sm:justify-center">
                         <img src="/img/jagung-1.png" alt="" width={"500px"} data-aos="fade-right" />
                         <div className="flex flex-col gap-4" data-aos="fade-left">

@@ -28,7 +28,7 @@ const register = (req, res) => {
     
     db.query(sql, [username, email, hashedPassword], (err, result) => {
       if (err) {
-        return res.status(500).json({ message: "Gagal registrasi.", error: err });
+        return res.status(500).json({ message: "Username sudah digunakan.", error: err });
       }
       res.status(201).json({ message: "Registrasi berhasil!" });
     });
@@ -136,7 +136,7 @@ const resetEmail = (req, res) => {
 
       if (results.length === 0) {
         return res.status(404).json({ message: "Pengguna tidak ditemukan." });
-      }zz
+      }
 
       const user = results[0];
       const isPasswordValid = bcrypt.compareSync(password, user.password);
@@ -165,4 +165,4 @@ module.exports = {
   login,
   resetPassword,
   resetEmail,
-};
+}; 

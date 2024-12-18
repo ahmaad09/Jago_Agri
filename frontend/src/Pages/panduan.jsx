@@ -39,6 +39,7 @@ const Panduan = () => {
                 <Navigasi
                     dashboardText="Dashboard"
                     forumText="Forum"
+                    news = "News"
                     panduanText="Panduan"
                     pengaturanText="Pengaturan"
                 />

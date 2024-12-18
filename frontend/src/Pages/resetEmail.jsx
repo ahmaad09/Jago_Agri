@@ -3,7 +3,7 @@ import AutsLayouts from "../components/Elemets/Layouts/AutsLayout"
 
 const ResetEmail = () => {
     return (
-        <AutsLayouts title="Reset Username" type='resetusername' bg="login">
+        <AutsLayouts title="Reset Email" type='resetusername' bg="login">
             <FromResetEmail />
         </AutsLayouts>
     )

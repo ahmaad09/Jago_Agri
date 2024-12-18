@@ -6,7 +6,7 @@ const Cuaca = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const apiKey = "704d6c9d5901c5fd4c407434b6f5dfd3"; // API cuaca
+        const apiKey = "704d6c9d5901c5fd4c407434b6f5dfd3"; // API Key OpenWeatherMap
         const latitude = 5.5483;
         const longitude = 95.3238;
         const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
@@ -19,16 +19,17 @@ const Cuaca = () => {
                 return response.json();
             })
             .then((data) => {
-                const dailyData = data.list
-                    .filter((entry, index) => index % 8 === 0)
-                    .slice(0, 5)
-                    .map((entry) => ({
-                        date: new Date(entry.dt * 1000).toLocaleDateString("en-US", { weekday: 'long', day: 'numeric', month: 'short' }),
-                        temperature: entry.main.temp,
-                        condition: entry.weather[0].main.toLowerCase() // Contoh: clear, rain, clouds
-                    }));
+                // Ambil 5 data cuaca dengan jam saja
+                const hourlyData = data.list.slice(0, 5).map((entry) => ({
+                    time: new Date(entry.dt * 1000).toLocaleTimeString("id-ID", { 
+                        hour: '2-digit', 
+                        minute: '2-digit' 
+                    }), // Format hanya jam dan menit
+                    temperature: entry.main.temp,
+                    condition: entry.weather[0].main.toLowerCase()
+                }));
 
-                setForecastData(dailyData);
+                setForecastData(hourlyData);
             })
             .catch((error) => {
                 console.error("Error:", error);
@@ -56,7 +57,7 @@ const Cuaca = () => {
 
     return (
         <div className="flex space-x-5 mb-10">
-            <div className="relative bg-hijau w-[394.87px] h-[230px] rounded-[30px] flex flex-col items-center justify-center p-4 z-0">
+            <div className="relative bg-hijau w-[394.87px] h-[230px] rounded-[30px] flex flex-col items-center justify-center  z-0">
                 {!forecastData && (
                     <div className="absolute inset-0 flex items-center justify-center bg-hijau rounded-[30px]">
                         <div className="spinner"></div>
@@ -64,17 +65,17 @@ const Cuaca = () => {
                 )}
                 {forecastData && (
                     <div className="flex flex-col">
-                        {forecastData.map((day, index) => (
-                            <div key={index} className="flex items-center">
+                        {forecastData.map((entry, index) => (
+                            <div key={index} className="flex items-center m-0">
                                 <img
-                                    src={getIcon(day.condition)}
-                                    alt={`Weather Icon for ${day.condition}`}
-                                    className="w-10 h-10"
-                                    onError={() => console.error("Failed to load icon for condition:", day.condition)}
+                                    src={getIcon(entry.condition)}
+                                    alt={`Weather Icon for ${entry.condition}`}
+                                    className="w-11 h-11"
+                                    onError={() => console.error("Failed to load icon for condition:", entry.condition)}
                                 />
-                                <div className="ml-4 flex space-x-2 justify-between">
-                                    <h2 className="font-semibold text-white text-sm mr-10">{day.temperature}°C</h2>
-                                    <h5 className="font-semibold text-white text-sm">{day.date}</h5>
+                                <div className="ml-4 flex justify-between w-full">
+                                    <h2 className="font-semibold text-white text-sm mr-10">{entry.temperature}°C</h2>
+                                    <h5 className="font-semibold text-white text-sm">{entry.time}</h5>
                                 </div>
                             </div>
                         ))}

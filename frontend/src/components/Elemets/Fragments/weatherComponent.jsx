@@ -189,6 +189,7 @@ const WeatherForecast = ({ city }) => {
                                 date={day.date}
                                 weather={day.weather}
                             />
+                            <img src="/img/navigasi/navigation1.png" alt="" className="w-12" />
                         </div>
                     ))}
                 </div>

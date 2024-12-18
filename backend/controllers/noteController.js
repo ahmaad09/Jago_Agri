@@ -1,8 +1,7 @@
 const db = require("../config/db");
 
-// Get all notes for a user
 exports.getNotes = (req, res) => {
-  const userId = req.user.id; // Assumes authentication middleware adds user info to req
+  const userId = req.user.id;
   const query = "SELECT * FROM notes WHERE user_id = ?";
   db.query(query, [userId], (err, results) => {
     if (err) return res.status(500).json({ error: err.message });
@@ -10,7 +9,6 @@ exports.getNotes = (req, res) => {
   });
 };
 
-// Add a new note
 exports.addNote = (req, res) => {
   const { title, content } = req.body;
   const userId = req.user.id;
@@ -21,7 +19,6 @@ exports.addNote = (req, res) => {
   });
 };
 
-// Update an existing note
 exports.updateNote = (req, res) => {
   const { id, title, content } = req.body;
   const query = "UPDATE notes SET title = ?, content = ? WHERE id = ?";
@@ -31,7 +28,6 @@ exports.updateNote = (req, res) => {
   });
 };
 
-// Delete a note
 exports.deleteNote = (req, res) => {
   const { id } = req.body;
   const query = "DELETE FROM notes WHERE id = ?";

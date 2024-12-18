@@ -16,6 +16,21 @@ import HawarDaun from './Pages/hawarDaun.jsx';
 import PenyakitBulai from './Pages/penyakitBulai.jsx';
 import ResetEmail from './Pages/resetEmail.jsx';
 import ProtectedRoute from './Pages/ProtectedRoute.jsx';
+import News from './Pages/news.jsx';
+import App from './Pages/app.jsx';
+import DashboarAdmin from './Pages/dashboardAdmin.jsx';
+import Berita from './Pages/berita-satu.jsx';
+import BeritaDua from './Pages/berita-dua.jsx';
+import BeritaTiga from './Pages/berita-tiga.jsx';
+import BeritaEmpat from './Pages/berita-empat.jsx';
+import BeritaLima from './Pages/berita-lima.jsx';
+import BeritaEnam from './Pages/berita-enam.jsx';
+import BeritaTujuh from './Pages/berita-tujuh.jsx';
+import BeritaDelapan from './Pages/berita-delapan.jsx';
+import BeritaSembilan from './Pages/berita-sembilan.jsx';
+import BeritaSepuluh from './Pages/berita-sepuluh.jsx';
+import BeritaSebelas from './Pages/berita-sebelas.jsx';
+import BeritaDuaBelas from './Pages/berita-duabelas.jsx';
 
 
 const router = createBrowserRouter([
@@ -26,6 +41,10 @@ const router = createBrowserRouter([
   {
     path: "*",
     element: <ErrorPage />
+  },
+  {
+    path: "/tambah",
+    element: <App />,
   },
   {
     path: "/login",
@@ -44,6 +63,10 @@ const router = createBrowserRouter([
     element: <ResetEmail/>
   },
   {
+    path: "/admin",
+    element: <DashboarAdmin />,
+  },
+  {
     path: "/reset-password",
     element: <ResetPassword/>
   },
@@ -51,6 +74,10 @@ const router = createBrowserRouter([
     path: "/products",
     element: <ProductPage/>
   },
+  // {
+  //   path: "/dashboard-admin",
+  //   element: <DashboarAdmin/>
+  // },
   {
     path: "/dashboard",
     element:  (
@@ -64,6 +91,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <Forum />
+      </ProtectedRoute>
+    )
+  },
+  {
+    path: "/news",
+    element: (
+      <ProtectedRoute>
+        <News />
       </ProtectedRoute>
     )
   },
@@ -87,7 +122,92 @@ const router = createBrowserRouter([
       <ProtectedRoute>
         <PenyakitBulai/>
       </ProtectedRoute>
+  },
+  {
+    path: "/news/10",
+    element: 
+      <ProtectedRoute>
+          <Berita/>
+      </ProtectedRoute>
+  },
+  {
+    path: "/news/11",
+    element: 
+      <ProtectedRoute>
+          <BeritaDua/>
+      </ProtectedRoute>
+  },
+  {
+    path: "/news/12",
+    element: 
+      <ProtectedRoute>
+          <BeritaTiga/>
+      </ProtectedRoute>
+  },
+  {
+    path: "/news/13",
+    element: 
+      <ProtectedRoute>
+          <BeritaEmpat/>
+      </ProtectedRoute>
+  },
+  {
+    path: "/news/14",
+    element: 
+      <ProtectedRoute>
+          <BeritaLima/>
+      </ProtectedRoute>
+  },
+  {
+    path: "/news/15",
+    element: 
+      <ProtectedRoute>
+          <BeritaEnam/>
+      </ProtectedRoute>
+  },
+  {
+    path: "/news/16",
+    element: 
+      <ProtectedRoute>
+          <BeritaTujuh/>
+      </ProtectedRoute>
+  },
+  {
+    path: "/news/18",
+    element: 
+      <ProtectedRoute>
+          <BeritaDelapan/>
+      </ProtectedRoute>
+  },
+  {
+    path: "/news/19",
+    element: 
+      <ProtectedRoute>
+          <BeritaSembilan/>
+      </ProtectedRoute>
+  },
+  {
+    path: "/news/20",
+    element: 
+      <ProtectedRoute>
+          <BeritaSepuluh/>
+      </ProtectedRoute>
+  },
+  {
+    path: "/news/21",
+    element: 
+      <ProtectedRoute>
+          <BeritaSebelas/>
+      </ProtectedRoute>
+  },
+  {
+    path: "/news/22",
+    element: 
+      <ProtectedRoute>
+          <BeritaDuaBelas/>
+      </ProtectedRoute>
   }
+  
 ])
 
 createRoot(document.getElementById('root')).render(

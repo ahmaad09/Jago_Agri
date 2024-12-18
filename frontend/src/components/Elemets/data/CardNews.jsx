@@ -1,62 +1,101 @@
 import { Fragment } from "react";
+import { Link } from "react-router-dom";
 
-// Card Newas
-const CardNews = (props) => {
-    const CardNews = [
+// Card News
+const CardNews = () => {
+    const newsData = [
         {
             id: 1,
-            title: "Harga Jagung Domestik Naik, Petani Mulai Optimis",
-            img: "/img/news/1.png",
-            date: "11 November 2024",
-            desc: "Sejak awal musim panen, harga jagung di pasar lokal menunjukkan kenaikan sebesar 15% dibandingkan tahun lalu. Kenaikan ini dipicu oleh meningkatnya permintaan jagung untuk pakan ternak dan industri makanan. Beberapa petani menyatakan optimisme mereka terhadap pendapatan musim ini, meskipun masih menghadapi tantangan cuaca yang tidak menentu."
+            title: "Tinjau Panen Jagung di Sumbawa, Jokowi: Harga Turun ke Rp 4.200",
+            img: "/img/news/6.png",
+            date: "2 MEI 2024",
+            desc: "Menurutnya, panen jagung besar-besaran akan menciptakan produksi yang lebih besar dari kebutuhan pasar (demand) sehingga berdampak pada penurunan harga jagung. Ia mengatakan, saat ini harga jagung turun drastis dari Rp 7.000 menjadi Rp 4.200.",
+            link : "/news/10"
         },
         {
             id: 2,
-            title: "Penemuan Varietas Jagung Baru yang Tahan Kekeringan",
-            img: "/img/news/2.png",
-            date: "11 November 2024",
-            desc: "Para peneliti agrikultur di Indonesia berhasil mengembangkan varietas jagung yang tahan terhadap kekeringan. Varietas ini diklaim dapat tumbuh dengan baik meskipun curah hujan rendah. Uji coba dilakukan di daerah Jawa Tengah dengan hasil panen mencapai 7 ton per hektar. Petani yang mengadopsi teknologi ini diproyeksikan mampu mengurangi risiko gagal panen."
+            title: "Keren! Petani Arosbaya ini panen jagungnya dengan bantuan mesin combine harvester",
+            img: "/img/news/23.png",
+            date: "23 NOVEMBER 2024",
+            desc: "Hadir dalam kegiatan panen jagung ini Kasubag protokol Pemkab Bangkalan, Dinas pertanian dan Penyuluh Pertanian, Muspika kecamatan Arosbaya, kelompok tani dan masyarakat yang ingin menyaksikan langsung untuk pertama kalinya panen jagung menggunakan combine harvester tipe GCH102",
+            link : "/news/11"
         },
         {
             id: 3,
-            title: "Ekspor Jagung Indonesia ke Filipina Meningkat Tajam",
-            img: "/img/news/3.png",
-            date: "11 November 2024",
-            desc: "Indonesia mencatat peningkatan ekspor jagung sebesar 20% ke Filipina dalam tiga bulan terakhir. Kualitas jagung yang dihasilkan petani lokal semakin diminati di pasar internasional. Pemerintah melalui Kementerian Pertanian menyatakan komitmen untuk mendukung petani dengan memperluas program subsidi pupuk dan pelatihan teknologi pertanian."
+            title: "Petani di Lebak Memanfaatkan Drone untuk Mengairi Lahan Pertanian Jagung",
+            img: "/img/news/22.png",
+            date: "3 AGUSTUS 2024",
+            desc: "Impor jagung tahun ini diperkirakan hanya 3 juta ton, turun dari prediksi awal 3,5–3,6 juta ton. Produksi lokal meningkat, didorong harga jagung naik dari Rp 2.800/kg (2013) menjadi Rp 3.400–Rp 3.500/kg, memotivasi petani. Meski produksi menurun di akhir tahun, kebutuhan masih sebagian besar terpenuhi.",
+            link : "/news/12"
         },
         {
             id: 4,
-            title: "Penggunaan Drone untuk Memantau Tanaman Jagung Mulai Marak",
-            img: "/img/news/4.png",
-            date: "11 November 2024",
-            desc: "Teknologi modern semakin memudahkan petani dalam mengelola lahan. Beberapa komunitas petani jagung di Jawa Tengah mulai menggunakan drone untuk memantau kesehatan tanaman dan mendeteksi area yang membutuhkan perawatan. Dengan teknologi ini, efisiensi waktu dan biaya dapat meningkat hingga 30%."
+            title: "Bapanas mengimbau kepada semua pihak untuk memaksimalkan penyerapan produksi jagung dalam negeri.",
+            img: "/img/news/9.png",
+            date: "18 MEI 2024",
+            desc: "Badan Pangan Nasional (Bapanas) telah menaikkan harga acuan pembelian (HAP) jagung di tingkat petani dari Rp 4.800 menjadi Rp 5.000 per kilogram (Kg).",
+            link : "/news/13"
         },
         {
             id: 5,
-            title: "Peringatan Dini Serangan Hama pada Lahan Jagung",
-            img: "/img/news/5.png",
-            date: "11 November 2024",
-            desc: "Badan Meteorologi, Klimatologi, dan Geofisika (BMKG) mengingatkan petani di wilayah Jawa dan Sumatera untuk waspada terhadap potensi serangan hama ulat grayak, terutama selama musim pancaroba. Diharapkan petani segera menerapkan langkah pencegahan, seperti rotasi tanaman dan penggunaan pestisida nabati."
+            title: "Polres Batu Gandeng Dinas Pertanian Aktifkan Lahan Tidur Wujudkan Ketahanan Pangan",
+            img: "/img/news/10.png",
+            date: "12 November 2024",
+            desc: "Lahan tidur seluas 10 hektar di Dusun Dresel Desa Oro-oro Ombo, Kota Batu dilakukan pengaktifan oleh Polres Batu dan Dinas Pertanian dan Ketahanan Pangan (Dispangtan) Kota Batu untuk pertanian. Inisiasi tersebut dilakukan untuk mendukung ketahanan pangan.",
+            link : "/news/14"
         },
+    ];
 
-    ]
     return (
         <Fragment>
-            <h1 className="mx-5 font-semibold text-hijau text-4xl border-b-2 border-hijau w-fit my-12">News</h1>
-            {CardNews.map((item) => (
-                <disv key={item.id} className="grid grid-cols-2 gap-5 items-center">
-                    <div className="bg-hijau w-60 h-60 rounded-xl flex items-center mb-5">
-                        <img src={item.img} alt="" className="w-full h-full object-fit rounded-xl p-3" />
+            <div className="flex justify-between w-full items-center">
+                <h1 className="mx-5 font-semibold text-hijau text-4xl border-b-2 border-hijau w-fit my-6">
+                    News JagoAgri
+                </h1>
+                <Link to="/news" className="text-black font-semibold">
+                    Berita Lainnya
+                </Link>
+            </div>
+            <p className="text-black w-1/2 mb-5">
+                Ayo baca berita mengenai Pangan Indonesia, serta kegiatan JagoAgri. Berita-berita ini tentunya selalu up to date! Klik berita lainnya untuk menampilkan semua berita.
+            </p>
+            <div className="flex flex-col gap-5">
+                {newsData.map((item) => (
+                    <div
+                        key={item.id}
+                        className="flex gap-5 items-start border-b pb-5"
+                    >
+                        <div className="bg-hijau w-60 h-40 rounded-xl flex items-center">
+                            <img
+                                src={item.img}
+                                alt={item.title}
+                                className="w-full h-full object-cover rounded-xl p-2"
+                            />
+                        </div>
+
+                        {/* Konten Teks */}
+                        <div className="flex-1">
+                            <h2 className="font-semibold text-black text-lg">
+                                {item.title}
+                            </h2>
+                            <span className="italic text-sm text-gray-600">
+                                {item.date}
+                            </span>
+                            <p className="mt-2 text-sm text-black">
+                                {item.desc}
+                            </p>
+                            <Link
+                                to={item.link}
+                                className="bg-hijau text-white py-1 px-3 rounded-xl mt-2 inline-block text-sm font-medium hover:bg-green-700"
+                            >
+                                Selengkapnya
+                            </Link>
+                        </div>
                     </div>
-                    <div className=" flex flex-col mb-9 -left-60 relative">
-                        <h2 className="font-semibold text-black text-xl">{item.title}</h2>
-                        <span className="italic text-sm text-hijau">{item.date}</span>
-                        <p>{item.desc}</p>
-                        <p className="bg-hijau text-white w-fit py-1 px-3 rounded-xl mt-2">selengkapnya</p>
-                    </div>
-                </disv>
-            ))}
+                ))}
+            </div>
         </Fragment>
-    )
+    );
 };
+
 export default CardNews;

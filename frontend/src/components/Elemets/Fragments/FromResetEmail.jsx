@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Button from "../Button/Index";
 import InputForm from "../Input/Index";
 
@@ -14,7 +16,7 @@ const FormResetEmail = () => {
 
         // Validasi input secara eksplisit
         if (!oldEmail.trim() || !newEmail.trim() || !password.trim()) {
-            setError("Semua kolom harus diisi!");
+            toast.error("Semua kolom harus diisi!");
             return;
         }
 
@@ -25,80 +27,71 @@ const FormResetEmail = () => {
                 body: JSON.stringify({ email: oldEmail, newEmail, password }),
             });
 
-            console.log("Response status:", response.status);
-            const textResponse = await response.text(); // Ambil respons dalam bentuk teks
-            console.log("Response text:", textResponse);
-
-            // Parsing respons teks sebagai JSON jika perlu
-            let data;
-            try {
-                data = JSON.parse(textResponse);
-            } catch (error) {
-                console.error("Gagal parsing JSON:", error);
-                setError("Terjadi kesalahan saat mereset email.");
-                return;
-            }
-
-            console.log("Parsed Response data:", data);
+            const data = await response.json();
 
             if (response.ok) {
-                alert("Email berhasil diubah! Silakan login kembali.");
-                window.location.href = "/login"; // Arahkan ke halaman login
+                toast.success("Email berhasil diubah! Silakan login kembali.");
+                setTimeout(() => {
+                    window.location.href = "/login"; // Redirect setelah notifikasi
+                }, 2000);
             } else {
-                setError(data.message || "Terjadi kesalahan saat mereset email.");
+                toast.error(data.message || "Terjadi kesalahan saat mereset email.");
             }
         } catch (error) {
             console.error("Error:", error);
-            setError("Tidak dapat terhubung ke server. Silakan coba lagi.");
+            toast.error("Tidak dapat terhubung ke server. Silakan coba lagi.");
         }
     };
 
     return (
-        <form onSubmit={handleResetEmail} className="flex flex-col">
-            <InputForm
-                type="email"
-                name="oldEmail"
-                placeholder="Email Lama"
-                htmlFor="oldEmail"
-                id="oldEmail"
-                value={oldEmail}
-                onChange={(e) => setOldEmail(e.target.value)}
-                required
-            />
+        <div>
+            <ToastContainer />
+            <form onSubmit={handleResetEmail} className="flex flex-col">
+                <InputForm
+                    type="email"
+                    name="oldEmail"
+                    placeholder="Email Lama"
+                    htmlFor="oldEmail"
+                    id="oldEmail"
+                    value={oldEmail}
+                    onChange={(e) => setOldEmail(e.target.value)}
+                    required
+                />
 
-            <InputForm
-                type="email"
-                name="newEmail"
-                placeholder="Email Baru"
-                htmlFor="newEmail"
-                id="newEmail"
-                value={newEmail}
-                onChange={(e) => setNewEmail(e.target.value)}
-                required
-            />
+                <InputForm
+                    type="email"
+                    name="newEmail"
+                    placeholder="Email Baru"
+                    htmlFor="newEmail"
+                    id="newEmail"
+                    value={newEmail}
+                    onChange={(e) => setNewEmail(e.target.value)}
+                    required
+                />
 
-            <InputForm
-                type="password"
-                name="password"
-                placeholder="Password untuk Verifikasi"
-                htmlFor="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-            />
+                <InputForm
+                    type="password"
+                    name="password"
+                    placeholder="Password untuk Verifikasi"
+                    htmlFor="password"
+                    id="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
 
-            {error && <p className="text-red-500 text-center mt-2">{error}</p>}
+                {error && <p className="text-red-500 text-center mt-2">{error}</p>}
 
-            <div className="flex justify-center w-full mt-20">
-                <Button
-                    type="submit"
-                    className="text-white w-1/3 hover:bg-yellow-600 bg-kuning"
-                >
-                    Confirm
-                </Button>
-            </div>
-        </form>
+                <div className="flex justify-center w-full mt-5 ">
+                    <Button
+                        type="submit"
+                        className="text-white w-1/3 hover:bg-yellow-600 bg-kuning"
+                    >
+                        Confirm
+                    </Button>
+                </div>
+            </form>
+        </div>
     );
 };
 

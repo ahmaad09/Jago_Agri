@@ -12,12 +12,12 @@ AOS.init();
 
 const Forum = () => {
     const card = [
-        { id: 1, name: "Lorem Ipsum", img: "/img/image-9.png" },
-        { id: 2, name: "Lorem Ipsum", img: "/img/image-10.png" },
-        { id: 3, name: "Lorem Ipsum", img: "/img/image-11.png" },
-        { id: 4, name: "Lorem Ipsum", img: "/img/image-9.png" },
-        { id: 5, name: "Lorem Ipsum", img: "/img/image-10.png" },
-        { id: 6, name: "Lorem Ipsum", img: "/img/image-11.png" },
+        { id: 1,  name: "wili sinaga",title: "Panduan Lengkap Budidaya Jagung", img: "/img/image-9.png" },
+        { id: 2,  name: "alif",title: "Jenis Pupuk dan Jadwal Pemupukan Jagung yang Tepat", img: "/img/image-10.png" },
+        { id: 3,  name: "ahmad",title: "Cara Menanggulangi Hama dan Penyakit", img: "/img/image-11.png" },
+        { id: 4,  name: "riska",title: "Jenis Pupuk dan Jadwal Pemupukan Jagung yang Tepat", img: "/img/image-9.png" },
+        { id: 5,  name: "ima",title: "Lorem Ipsum", img: "/img/image-10.png" },
+        { id: 6,  name: "arif",title: "Lorem Ipsum", img: "/img/image-11.png" },
     ];
 
     const [likes, setLikes] = useState(
@@ -43,6 +43,7 @@ const Forum = () => {
                     dashboardText="Dashboard"
                     forumText="Forum"
                     panduanText="Panduan"
+                    news="News"
                     pengaturanText="Pengaturan"
                 />
             </Header>
@@ -67,13 +68,13 @@ const Forum = () => {
                             data-aos="fade-right"
                         >
                             <img src={item.img} alt="" />
-                            <div className="flex flex-col items-center">
-                                <h1 className="text-black text-xl font-bold">{item.name}</h1>
+                            <div className="flex flex-col items-center ">
+                                <h1 className="text-black text-lg  font-bold">{item.title}</h1>
                                 <div className="flex gap-3 items-center flex-wrap mt-20">
                                     <div className="rounded-full w-8 h-8 bg-hijau"></div>
                                     <div className="flex flex-col">
                                         <span className="text-slate-900 font-bold text-sm">
-                                            Willy sinaga
+                                           {item.name}
                                         </span>
                                         <span className="text-slate-900 font-semibold text-sm">
                                             28 Oktober 2024
